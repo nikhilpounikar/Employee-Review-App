@@ -24,15 +24,15 @@ router.post('/create' , userController.create);
 router.get('/sign-out', userController.destroySession);
 
 // Help to render the forget password page, and change the forget passwrod
-router.get('/forgetPassword', userController.forgetPasswordPage);
-router.post('/forgetPasswordLink' , userController.forgetPasswordLink);
+router.get('/forgot-password', userController.forgetPasswordPage);
+router.post('/forgot-password-link' , userController.forgetPasswordLink);
 
 // all the empoyee
-router.post('/addEmployee', userController.addEmployeee);
+router.post('/employee/add', userController.addEmployeee);
 
-router.post('/update-employee',passport.checkAuthenticationAsAdmin, userController.updateEmployee);
+router.post('/employee/update',passport.checkAuthenticationAsAdmin, userController.updateEmployee);
 
-router.post('/makeAdmin',passport.checkAuthenticationAsAdmin, userController.makeAdmin);
+router.post('/make-admin',passport.checkAuthenticationAsAdmin, userController.makeAdmin);
 
 
 module.exports = router;
