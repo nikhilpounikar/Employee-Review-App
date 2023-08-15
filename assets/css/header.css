@@ -1,97 +1,57 @@
-/* The below css is for header of the page, the header of the page is going to remain constant, only
- the body is going to chagne.
-  */
-
-  /* Styling for navBar, I have made nav Bar as flex, and all the element inside this navBar is going to 
-  in row wise */
-  .navBar{
-    background-color:#188b6b;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-/* These styling are for anchor tag in navBar */
-.nameOfApp a{
-    font-size: 45px;
-    text-decoration: none;
-    margin-left:-15px;
-    color:yellow;
-    letter-spacing:4px;
-    font-weight: 600;
-    text-shadow: -1px 1px 0 #41ba45,
-	1px 1px 0 #c63d2b,
-	1px -1px 0 #42afac,
-	-1px -1px 0 #c6c23f;
-    text-shadow: 0 1px 1px #bbb,
-			   0 2px 0 #999, 
-			   0 3px 0 #888, 
-			   0 4px 0 #777, 
-			   0 5px 0 #666, 
-			   0 6px 0 #555, 
-			   0 7px 0 #444, 
-			   0 8px 0 #333, 
-			   0 9px 7px #302314;
-}
-.nameOfApp img{
-    height:65px;
-    width:80px;
-    margin-left:30px;
-    
-    margin-top:-30px;
-    
-}
-/* for the name of users */
-.nameOfUser{
-    font-size: 20px;
-    margin-left:2px;
-    margin-right:8px;
-    margin-top:8px;
-    color:white;
-    font-weight:bold;
-
-}
-.nameOfUser img{
-    height:30px;
-    width:30px;
-  padding:5px;
-  margin-right:8px;
-   
-}
-
-/* Thesse styling are for logOut, button which is present on the navBar */
-.logOut a{
-    font-size: 30px;
-    margin-right: 10px;
-    text-decoration: none;
-    color: black;
-}
-
-.noUser ul{
-    display: flex;
-    margin: 10px;
-    justify-content: space-between;
-}
-
-.noUser li{
-    list-style: none;
-    font-size: 19px;
-    padding-left: 20px;
-    margin-top:10px;
-    margin-right:20px;
-}
-
-.noUser li a{
-    text-decoration: none;
+/* Example CSS for the navigation bar */
+.navBar {
+    background-color: #2C3E50;
     color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.logOut small{
-    font-size: 15px;
-    color:white;
-    text-decoration:underline 1px yellow ;
-    padding:5px;
+
+.logoAndName {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
 }
-.logOut small:hover{
-   
-    color:yellow;
-    
+
+.logoAndName img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.menuItems ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.menuItems li {
+    margin-right: 15px;
+}
+
+.menuItems a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.menuItems a:hover {
+    color: #E74C3C;
+}
+
+.userProfile {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.userProfile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
