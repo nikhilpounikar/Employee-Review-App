@@ -1,7 +1,7 @@
 {
   "name": "employee-review-system",
   "version": "1.0.0",
-  "description": "A employee review system, where a employe can review another employee. And there is a admin, who controll all these thing.",
+  "description": "The Employee Review Application is a comprehensive digital tool designed to streamline and enhance the process of conducting employee performance reviews within an organization. This application serves as a central hub where managers, supervisors, and HR professionals can efficiently assess, document, and track employee performance and development over time.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
