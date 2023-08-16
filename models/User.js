@@ -22,11 +22,14 @@ const UserSchema = new mongoose.Schema({
         type : 'Boolean',
         required : true
     },
-    userToReview : [{
+    usersWithPendingReviews : [{
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
     }],
-
+    givenReviews : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Review'
+    }],
     reviewRecivedFrom: [    // recieved review from another people
         {
             type: mongoose.Schema.Types.ObjectId,

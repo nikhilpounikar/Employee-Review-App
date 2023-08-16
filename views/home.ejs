@@ -27,19 +27,18 @@
         </div>
 
         <div class="home-box">
-            <div class="employeereview">Kindly, review your co-employees<img src="../images/rating.webp"><br>
-            <i><h6>This task is assigned by the Admin</h6></i>
+            <div class="employeereview">Kindly, review your co-employees<br>
             </div>
 
             <div class="reviewBox">
-                <% for(let i = 0 ;i<recipent.length ; i++ ) {%>
-                    <%if(recipent[i] != null) {%>
+                <% for(let userWithPendingReview of user.usersWithPendingReviews) {%>
+                   
                         <div class="outerBox">
                             <h6>
-                                To : <%= recipent[i].name%>
+                                To : <%= userWithPendingReview.name%>
                             </h6>
                             <div class="innerBox">
-                                <form action="/reviews/newReview/<%= recipent[i]._id %>" method="get">
+                                <form action="/reviews/newReview/<%= userWithPendingReview._id %>" method="get">
                                     <textarea class="formClass" placeholder="Review, here !" name="newReview" rows="5"
                                     id="floatingTextarea2">
         
@@ -49,7 +48,7 @@
                                 </form>
                             </div>
                         </div>
-                    <%}%>
+        
                 <%}%>   
             </div>
         </div>
@@ -60,10 +59,10 @@
 
             
                 <div class="card-out">
-                    <% for(let review of reviews ) {%>
+                    <% for(let review of user.givenReviews ) {%>
                         <div class="in-card">
                             <h5 class="cls-txt">Message : <%= review.content %> </h5>
-                            <p class="cls-txt">From : <%= review.name %> </p>
+                            <p class="cls-txt">To : <%= review.name %> </p>
                             
                         </div>
                     <%}%>    
