@@ -33,7 +33,6 @@ module.exports.mapReviewerAndReviewee = async function (req, res) {
       req.flash("error", "Reviewer and Reviewee cannot be same.");
       return res.redirect("back");
     }
-    // After checking all the authentication , part the main part start from here.
     else {
       user.usersWithPendingReviews.push(req.body.reviewee);
       await user.save();

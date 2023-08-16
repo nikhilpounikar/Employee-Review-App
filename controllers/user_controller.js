@@ -109,7 +109,8 @@ module.exports.loginAsAdmin = async function (req, res) {
     }
 
     if (req.body.adminPassCode != "Admin@123") {
-      req.flash("error", "You have entered the wrong passcode"); // Display an error flash message
+      req.flash("error", "You have entered the wrong passcode");
+      return res.redirect("back"); // Display an error flash message
     }
 
     user.isAdmin = true;

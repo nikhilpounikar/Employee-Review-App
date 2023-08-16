@@ -22,12 +22,11 @@
 
                 <!-- the text part -->
         <div class="home-box">
-            <i class="text-colr">Welcome to Employee Review System that helps the admin identify top-performing employees by assigning co-worker reviews. It also allows the admin to promote employees to admin status and add new employees. This system creates a culture of accountability and promotes excellence, leading to better hiring decisions and a stronger workforce.</i>
-            <hr>
+           
         </div>
 
         <div class="home-box">
-            <div class="employeereview">Kindly, review your co-employees<br>
+            <div class="employeereview">Pending Review List<br>
             </div>
 
             <div class="reviewBox">
@@ -38,16 +37,25 @@
                                 To : <%= userWithPendingReview.name%>
                             </h6>
                             <div class="innerBox">
-                                <form action="/reviews/newReview/<%= userWithPendingReview._id %>" method="get">
+                                <form action="/reviews/add-review/<%= userWithPendingReview._id %>" method="get">
                                     <textarea class="formClass" placeholder="Review, here !" name="newReview" rows="5"
                                     id="floatingTextarea2">
-        
                                     </textarea>
+                                    <div class="rating">
+                                        Ratings
+                                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5">&#9733;</label>
+                                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4">&#9733;</label>
+                                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3">&#9733;</label>
+                                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2">&#9733;</label>
+                                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1">&#9733;</label>
+                                    </div>
+                                    <input type="hidden" value="<%=locals.user._id%>" name="reviewer">
                                     <br>
                                     <button type="submit" class="submitHomeButton"> Submit </button>
                                 </form>
                             </div>
                         </div>
+
         
                 <%}%>   
             </div>
