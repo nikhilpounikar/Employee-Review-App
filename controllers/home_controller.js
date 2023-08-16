@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const Review = require('../models/review');
+const User = require('../models/User');
+const Review = require('../models/Review');
 
 // This function is for the passing the variable to the home page, such as reviers array, and employee array
 module.exports.home = async function(req, res){
