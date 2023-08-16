@@ -14,7 +14,7 @@ module.exports.assignWork = async function (req, res) {
 module.exports.showEmployeeList = async function (req, res) {
   try {
     let employeList = await Users.find({});
-    return res.render("employee",{employeList});
+    return res.render("employee", { employeList });
   } catch (error) {
     // Handle the error appropriately
     console.error("Error in showEmployeeList:", error);
@@ -23,42 +23,23 @@ module.exports.showEmployeeList = async function (req, res) {
   }
 };
 
-// This function will set the reviewer and reviewer.
-module.exports.setReviewrAndReviewe = async function (req, res) {
+// This function will map the reviewer and reviewee.
+module.exports.mapReviewerAndReviewee = async function (req, res) {
   try {
-    // first checking if the req is made correct or not.
-    if (!req.isAuthenticated()) {
+    let user = await Users.findById(req.body.reviewer);
+    if (req.body.reviewer == req.body.reviewee) {
       // flash messages
-      req.flash("success", "Please Login !");
-      // console.log("Please logIn");
-      return res.redirect("/users/sign-in");
-    } else {
-      let employee = await Users.findById(req.user.id);
-
-      if (employee.isAdmin == false) {
-        // flash Messages
-        req.flash("error", "Opps ! Not Authorized ");
-        // console.log('User is not admin');
-        return res.redirect("/users/sign-in");
-      } else if (req.body.sender == req.body.reciver) {
-        // flash messages
-        // console.log("sender === reciver")
-        req.flash("error", "Sender and reciver should not be same !");
-        return res.redirect("back");
-      }
-      // After checking all the authentication , part the main part start from here.
-      else {
-        let sender = await Users.findById(req.body.sender);
-        let reciver = await Users.findById(req.body.reciver);
-        //console.log(sender + " " + reciver);
-        sender.userToReview.push(reciver);
-        sender.save();
-        reciver.reviewRecivedFrom.push(sender);
-        reciver.save();
-        // flash Messages
-        req.flash("success", "Task Assigned !");
-        return res.redirect("back");
-      }
+      // console.log("sender === reciver")
+      req.flash("error", "Reviewer and Reviewee cannot be same.");
+      return res.redirect("back");
+    }
+    // After checking all the authentication , part the main part start from here.
+    else {
+      user.usersWithPendingReviews.push(req.body.reviewee);
+      await user.save();
+      // flash Messages
+      req.flash("success", "Success");
+      return res.redirect("back");
     }
   } catch (err) {
     console.log("Errror in setting up the user " + err);
@@ -68,7 +49,6 @@ module.exports.setReviewrAndReviewe = async function (req, res) {
 // This function is for deleting the employee
 module.exports.deleteEmployee = async function (req, res) {
   try {
-   
     // Deleting the user.
     await Users.deleteOne({ _id: req.params.id });
     // flash Messages

@@ -13,7 +13,7 @@ router.get('/assignWork' , passport.checkAuthenticationAsAdmin , adminController
 // THis is help to view the employee
 router.get('/view-employee' , passport.checkAuthenticationAsAdmin , adminController.showEmployeeList);
 // It will help to set the reviews, 
-router.post('/setReviewes' , passport.checkAuthenticationAsAdmin , adminController.setReviewrAndReviewe);
+router.post('/map-performance-reviewer-reviewee' , passport.checkAuthenticationAsAdmin , adminController.mapReviewerAndReviewee);
 // This router will make new Admin
 // It will delete the employee
 router.get('/deleteEmployee/:id', passport.checkAuthenticationAsAdmin , adminController.deleteEmployee);
