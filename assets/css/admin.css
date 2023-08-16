@@ -63,7 +63,10 @@
 }
 
 .btn{
-    background-color: yellow;
+    background-color: rgba(81, 255, 1, 0.5);
+}
+.btn-disabled{
+    background-color: grey;
 }
 #addemp{
     background-color: lightyellow;

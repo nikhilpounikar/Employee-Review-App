@@ -28,7 +28,7 @@ router.post('/employee/add',passport.checkAuthenticationAsAdmin, adminController
 
 router.post('/employee/update',passport.checkAuthenticationAsAdmin, adminController.updateEmployee);
 
-router.post('/make-admin',passport.checkAuthenticationAsAdmin, adminController.makeEmployeeAdmin);
+router.get('/make-admin/:id',passport.checkAuthenticationAsAdmin, adminController.makeEmployeeAdmin);
 
 
 module.exports = router;

@@ -24,14 +24,24 @@
               <td> <%= employee.name%> </td>
               <td> <%= employee.email%> </td>
               <td> <%= employee.password%> </td>
-              <td> <%= employee.isAdmin%> </td>
+            
+              <% if(!employee.isAdmin) {%>
+                <td> 
+                  <a href="/admin/make-admin/<%= employee._id %>" class="btn btn-md">Make</a>
+              </td>
+              <%}else{%>
+                <td>
+                  <a href="#" class="btn btn-md btn-disabled">Yes</a>
+                </td>
+              <%}%> 
+
               <% if(locals.user.id != employee._id) {%>
                 <td> 
                   <a href="/admin/deleteEmployee/<%= employee._id %>" class="btn btn-md">Delete</a>
               </td>
               <%}else{%>
                 <td>
-                  <a href="" class="btn btn-md">Delete</a>
+                  <a href="" class="btn btn-md btn-disabled">Delete</a>
                 </td>
               <%}%> 
               <td> 

@@ -178,7 +178,7 @@ module.exports.updateEmployee = async function (req, res) {
 // THis function is used for making the new Admin, it is admin specific, fucntion
 module.exports.makeEmployeeAdmin = async function (req, res) {
   try {
-    let user = await Users.findById(req.user.id);
+    let user = await Users.findById(req.params.id);
 
     if (!user) {
       req.flash("error", "This user does not exits");
