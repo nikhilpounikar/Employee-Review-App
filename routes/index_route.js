@@ -13,7 +13,7 @@ router.get('/' ,passport.checkAuthentication, homeController.home);
 // all the requiest withe the suffix /userr, will require the user file, to compute
 router.use('/users' , require('./users_route'));
 // all the request with the suffix /admin , will require the admin file to compute
-router.use('/admin' , require('./admin'));
+router.use('/admin' , require('./admin_route'));
 
 // all the request with the suffix /reviews , will require the admin file to compute
 router.use('/reviews', require('./reviews_route'));

@@ -1,4 +1,5 @@
 const User = require("../models/User"); // Requiring the User model
+const passport = require("passport");
 
 // Rendering the sign-in page
 module.exports.signIn = function (req, res) {
@@ -17,6 +18,11 @@ module.exports.signUp = function (req, res) {
   return res.render("sign_up"); // Render the sign-up page view
 };
 
+// Rendering the sign-up page
+module.exports.redirectToHomePage = function (req, res) {
+  return res.redirect("/"); // Render the sign-up page view
+};
+
 // Creating a new user
 module.exports.createUser = async function (req, res) {
   if (req.body.password != req.body.confirmPassword) {
@@ -33,6 +39,9 @@ module.exports.createUser = async function (req, res) {
       isAdmin: false,
     });
 
+    // Authenticate the newly created user
+    req.flash("success", "Thank you for registration");
+    // Redirect to the main page after successful registration and authentication
     return res.redirect("/"); // Redirect to the home page
   }
   req.flash("error", "User Already exists. Try logging in."); // Display an error flash message
@@ -84,11 +93,13 @@ module.exports.updatePassword = async function (req, res) {
 // Logging in as an admin
 module.exports.loginAsAdmin = async function (req, res) {
   try {
-
-    let user = User.findById(req.params.id);
+    let user = await User.findById(req.params.id);
 
     if (!user) {
-      req.flash("error", "User does not exist. Please register before advancing."); // Display an error flash message
+      req.flash(
+        "error",
+        "User does not exist. Please register before advancing."
+      ); // Display an error flash message
       return res.redirect("back"); // Redirect back to the previous page
     }
 
@@ -106,7 +117,6 @@ module.exports.loginAsAdmin = async function (req, res) {
 
     req.flash("success", "Successfully logged in."); // Display a success flash message
     return res.redirect("/"); // Redirect to the home page
-
   } catch (error) {
     // Handle the error appropriately
     console.error(error);

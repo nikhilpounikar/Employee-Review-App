@@ -14,7 +14,7 @@ module.exports.assignWork = async function (req, res) {
 module.exports.showEmployeeList = async function (req, res) {
   try {
     let employeList = await Users.find({});
-    return res.render("employee");
+    return res.render("employee",{employeList});
   } catch (error) {
     // Handle the error appropriately
     console.error("Error in showEmployeeList:", error);
@@ -116,7 +116,7 @@ module.exports.addEmployee = async function (req, res) {
 
     let user = await Users.findOne({ email: req.body.email });
     if (!user) {
-      await User.create({
+      await Users.create({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,

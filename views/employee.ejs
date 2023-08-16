@@ -17,16 +17,17 @@
           </tr>
         </thead>
         <tbody>
-          <% for(let i = 0; i<employes.length; i++) {%>
+          <% let i=0%>
+          <% for(let employee of employeList) {%>
             <tr>
-              <th scope="row"><%= i+1 %></th>
-              <td> <%= employes[i].name%> </td>
-              <td> <%= employes[i].email%> </td>
-              <td> <%= employes[i].password%> </td>
-              <td> <%= employes[i].isAdmin%> </td>
-              <% if(locals.user.id != employes[i]._id) {%>
+              <th scope="row"><%= i++ %></th>
+              <td> <%= employee.name%> </td>
+              <td> <%= employee.email%> </td>
+              <td> <%= employee.password%> </td>
+              <td> <%= employee.isAdmin%> </td>
+              <% if(locals.user.id != employee._id) {%>
                 <td> 
-                  <a href="/admin/deleteEmployee/<%= employes[i]._id %>" class="btn btn-md">Delete</a>
+                  <a href="/admin/deleteEmployee/<%= employee._id %>" class="btn btn-md">Delete</a>
               </td>
               <%}else{%>
                 <td>
@@ -34,7 +35,7 @@
                 </td>
               <%}%> 
               <td> 
-                <a href="/admin/employee/update/<%= employes[i]._id %>" class="btn btn-md">Update</a>
+                <a href="/admin/employee/update/<%= employee._id %>" class="btn btn-md">Update</a>
             </tr>  
           <%}%>
           

@@ -7,7 +7,7 @@
     <div class="formInput">
         <h1> Welcome </h1>
         <% if(locals.oldEmployeeDetails) {%>
-            <form method="POST" action="/users/update-employee">
+            <form method="POST" action="/admin/employee/update">
                 <input type="hidden" name="_id" value="<%= locals.oldEmployeeDetails._id %>">
                 <input type="text" name="name" value="<%= locals.oldEmployeeDetails.name %>" placeholder="Enter name"
                     required><br>

@@ -63,7 +63,7 @@ app.use(flash());
 app.use(flashMiddleWare.setFlash);
 
 // setting up the router, following MVC structure.
-app.use('/' , require('./routes/index'));
+app.use('/' , require('./routes/index_route'));
 
 
 // Setting up the server at the given port
