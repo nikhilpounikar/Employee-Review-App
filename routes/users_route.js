@@ -27,4 +27,6 @@ router.get('/sign-out', userController.logOut);
 router.get('/forgot-password', userController.forgetPasswordPage);
 router.post('/update-password' , userController.updatePassword);
 
+//
+router.post('/login-as-admin/:id',passport.checkAuthentication, userController.loginAsAdmin);
 module.exports = router;

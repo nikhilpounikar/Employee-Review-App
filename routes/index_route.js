@@ -1,13 +1,14 @@
 const express = require('express'); // requiring expresss
 const router = express.Router(); // router
 const homeController = require('../controllers/home_controller'); // requeiring homeController
+const passport = require('passport');
 
 console.log(`router is loaded : {200}`);
 
 //This is initial route which decides the further routing.
 
 // It will redirect you to the home page
-router.get('/' , homeController.home);
+router.get('/' ,passport.checkAuthentication, homeController.home);
 
 // all the requiest withe the suffix /userr, will require the user file, to compute
 router.use('/users' , require('./users_route'));

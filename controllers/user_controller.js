@@ -82,4 +82,33 @@ module.exports.updatePassword = async function (req, res) {
   }
 };
 
+// creating the session, basically for logging In
+module.exports.loginAsAdmin = async function (req, res) {
+  try {
 
+    let user = User.findById(req.params.id);
+
+
+    if(!user){
+        req.flash("error", "User does not exits. Please registered before advancing.");
+        return res.redirect("back");
+    }
+
+    if(user.isAdmin){
+        req.flash("success", "Successfully logged in.");
+        return res.redirect("/");
+    }
+
+    user.isAdmin = true;
+    await user.save();
+
+    req.flash("success", "Successfully logged in.");
+    return res.redirect("/");
+
+  } catch (error) {
+    // Handle the error appropriately
+    console.error(error);
+    req.flash("error", "Something went wrong!");
+    return res.redirect("back");
+  }
+};

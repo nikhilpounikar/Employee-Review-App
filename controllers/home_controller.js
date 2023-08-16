@@ -1,49 +1,45 @@
 const User = require('../models/User');
 const Review = require('../models/Review');
 
-// This function is for the passing the variable to the home page, such as reviers array, and employee array
-module.exports.home = async function(req, res){
-    try{
-        // Checking for authorization
-        if (!req.isAuthenticated()) {
-            req.flash('error' , 'Authentication failed please login/register if you want to use this application.!');
-            
-            return res.redirect('/users/sign-in');
-        }
-        // Fetching the user and review from the form
+module.exports.home = async function(req, res) {
+    try {
+       
+        // Fetching the logged-in user and their submitted reviews
         let user = await User.findById(req.user.id);
         let review = await Review.find({ reviewer: req.user.id });
 
-        // takkng all the necessary part of recipent user in recipent array so that we can pass it as a varibalbe'
-        let recipent = [];
-        for(let i = 0; i<user.userToReview.length ; i++){
-            let userName = await User.findById(user.userToReview[i]);
-            recipent.push(userName);
-        }
-        // Taking all the necessary imformation of the reviewers in review array, and passing it in homePage
-        let reviews = [];
-        for(let i = 0; i<review.length ; i++){
-            let reviewUser = await User.findById(review[i].reviewed);
-            // console.log(review); 
-            if(reviewUser != null){
-                let currUser = {
-                    name : reviewUser.name,
-                    content : review[i].content
-                }
-                reviews.push(currUser);
+        // Fetching recipient user information and creating an array
+        let recipients = [];
+        for (let i = 0; i < user.userToReview.length; i++) {
+            let recipientUser = await User.findById(user.userToReview[i]);
+            if (recipientUser) {
+                recipients.push(recipientUser);
             }
         }
 
-        // Render the page, with the variable made above , and pass them as the argument
-        return res.render('home',{
-            title : "ERS | HOME",
-            recipent : recipent,
-            reviews : reviews,
-            user : user
+        // Creating an array of review information for rendering
+        let reviews = [];
+        for (let i = 0; i < review.length; i++) {
+            let reviewUser = await User.findById(review[i].reviewed);
+            if (reviewUser) {
+                let currReview = {
+                    name: reviewUser.name,
+                    content: review[i].content
+                };
+                reviews.push(currReview);
+            }
+        }
+
+        // Render the home page with the fetched data
+        return res.render('home', {
+            recipients: recipients,
+            reviews: reviews,
+            user: user
         });
 
-    }catch(err){
-        console.log(err);
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'Something went wrong!');
         return res.redirect('back');
     }
-}
+};

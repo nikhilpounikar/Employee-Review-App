@@ -8,13 +8,11 @@ module.exports.newReview = async (req, res) => {
     try {
         // first find recieoient //
         let recipient = await User.findById(req.params.id);
-        // console.log(recipient + " recipient ");
         if (!recipient) {
             console.log("Recipient is not valid");
             return res.redirect('/');
         }
 
-       //console.log(recipient._id);
         for(let i = 0; i<req.user.userToReview.length ; i++){
             if (req.user.userToReview[i] == recipient.id) {
                 // console.log("Entered in the loop");
