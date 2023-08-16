@@ -8,20 +8,27 @@ const passport = require('passport');
 const adminController = require('../controllers/admin_controller');
 
 // It will assign the work to the employeess
-router.get('/assignWork' , passport.checkAuthentication , adminController.assignWork);
+router.get('/assignWork' , passport.checkAuthenticationAsAdmin , adminController.assignWork);
 
 // THis is help to view the employee
-router.get('/view-employee' , passport.checkAuthentication , adminController.showEmployeeList);
+router.get('/view-employee' , passport.checkAuthenticationAsAdmin , adminController.showEmployeeList);
 // It will help to set the reviews, 
-router.post('/setReviewes' , passport.checkAuthentication , adminController.setReviewrAndReviewe);
+router.post('/setReviewes' , passport.checkAuthenticationAsAdmin , adminController.setReviewrAndReviewe);
 // This router will make new Admin
-router.post('/newAdmin' , passport.checkAuthentication , adminController.newAdmin);
 // It will delete the employee
-router.get('/deleteEmployee/:id', passport.checkAuthentication , adminController.deleteEmployee);
+router.get('/deleteEmployee/:id', passport.checkAuthenticationAsAdmin , adminController.deleteEmployee);
 
 // only admin can update other employee while rest cannot
 router.get('/employee/update/:id', passport.checkAuthenticationAsAdmin , adminController.getUpdateForm);
-// it will add the employee
-router.get('/add-employee' , passport.checkAuthentication , adminController.addEmployee);
+// it will get employee addition form
+router.get('/employee/add-page' , passport.checkAuthenticationAsAdmin , adminController.getEmployeeAdditionForm);
+
+// all the empoyee
+router.post('/employee/add',passport.checkAuthenticationAsAdmin, adminController.addEmployee);
+
+router.post('/employee/update',passport.checkAuthenticationAsAdmin, adminController.updateEmployee);
+
+router.post('/make-admin',passport.checkAuthenticationAsAdmin, adminController.makeAdmin);
+
 
 module.exports = router;

@@ -15,24 +15,16 @@ router.get('/sign-up' , userController.signUp);
 router.post('/create-session', passport.authenticate(
     'local',
     {failureRedirect: '/users/sign-in'},
-), userController.createSession);
+), userController.login);
 
 // It will create the new user
-router.post('/create' , userController.create);
+router.post('/create' , userController.createUser);
 
 // It will logOut form the current user
-router.get('/sign-out', userController.destroySession);
+router.get('/sign-out', userController.logOut);
 
 // Help to render the forget password page, and change the forget passwrod
 router.get('/forgot-password', userController.forgetPasswordPage);
-router.post('/forgot-password-link' , userController.forgetPasswordLink);
-
-// all the empoyee
-router.post('/employee/add', userController.addEmployeee);
-
-router.post('/employee/update',passport.checkAuthenticationAsAdmin, userController.updateEmployee);
-
-router.post('/make-admin',passport.checkAuthenticationAsAdmin, userController.makeAdmin);
-
+router.post('/update-password' , userController.updatePassword);
 
 module.exports = router;
