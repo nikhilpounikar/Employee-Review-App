@@ -2,33 +2,41 @@
 <link rel="stylesheet" href="/css/header.css">
 <div>
     <div class="navBar">
-        <div class="nameOfApp"><a href="/"> ERS</a></div>
+        <div class="navbar-left-side">
+            <a href="/"><img src="/images/erp_logo.jpg"alt="erp">
+            </a>
+            <a href="/" class="org-name">ERP
+            </a>
+        </div>
         <% if (locals.user){ %>
             <%if(locals.user.isAdmin){%>
-                <div class="logOut">
-                    
-                    <a href="/admin/assignWork"> <small>Assign Work</small> </a>
-                    <a href="/admin/view-employee"> <small>Employees</small> </a>
-                    <a href="/admin/employee/add-page"> <small> Add Employee </small> </a>
-                    <a href="/users/sign-out" > <small>LogOut </a> </small>
-                    <span class="nameOfUser"><%= locals.user.name%>  </span> 
+                <div class="navbar-right-side">
+
+                    <div class="navbar-button"><a href="/admin/assignWork"> Assign Work </a></div>
+                    <div class="navbar-button"><a href="/admin/view-employee"> Employees </a></div>
+                    <div class="navbar-button"><a href="/admin/employee/add-page">  Add Employee  </a></div>
+                    <div class="navbar-button"><a href="/users/sign-out"> LogOut </a> </div>
+                    <div class="nameOfUser">
+                        <span><%= locals.user.name%></span>
+                    </div>
                 </div>
-            <%}else{%>    
-                
-                <div class="logOut"> 
-                <a href="/users/sign-out" > <small>LogOut</small> </a> 
-                <span class="nameOfUser"><%= locals.user.name%>  </span>
-            </div>
+                <%}else{%>
+
+                    <div class="navbar-right-side">
+                        <div class="navbar-button"><a href="/users/sign-out">LogOut </a></div>
+
+                        <div class="nameOfUser">
+                            <span><%= locals.user.name%></span>
+                        </div>
+                    </div>
             <%}%>
-            
-        <%} else { %>
-            <div class="noUser">
-                <ul>
-                    <li> <a href="/users/sign-in"> Sign-In </a> </li>
-                    <li>  <a href="/users/sign-up"> Sign-Up </a> </li>
-                </ul>
-            </div>
-        
-        <%}%>       
+
+                        <%} else { %>
+                            <div class="navbar-right-side">
+                                    <div class="navbar-button"><a href="/users/sign-in"> Sign-In </a></div>
+                                    <div class="navbar-button"><a href="/users/sign-up"> Sign-Up </a> </div> 
+                            </div>
+
+            <%}%>
     </div>
-</div> 
+</div>
