@@ -1,80 +1,84 @@
 const Users = require("../models/User");
 
-// This function is for assigning Work, and sending some data to it.
+// Render the 'Assign Work' page with employee list
 module.exports.assignWork = async function (req, res) {
   let employe = await Users.find({});
-
   return res.render("admin", {
     title: "ERS | Assign Work",
     employe: employe,
   });
 };
 
-// This function will show the list of employee woking in the company.
+// Render the 'Employee List' page
 module.exports.showEmployeeList = async function (req, res) {
   try {
+    // Fetch all employees
     let employeList = await Users.find({});
     return res.render("employee", { employeList });
   } catch (error) {
-    // Handle the error appropriately
+    // Handle error while fetching employee list
     console.error("Error in showEmployeeList:", error);
     req.flash("error", "An error occurred while fetching the employee list.");
     return res.redirect("back");
   }
 };
 
-// This function will map the reviewer and reviewee.
+// Map a reviewer and reviewee
 module.exports.mapReviewerAndReviewee = async function (req, res) {
   try {
+    // Find the reviewer user
     let user = await Users.findById(req.body.reviewer);
+    
     if (req.body.reviewer == req.body.reviewee) {
-      // flash messages
-      // console.log("sender === reciver")
-      req.flash("error", "Reviewer and Reviewee cannot be same.");
+      // Display error message if reviewer and reviewee are the same
+      req.flash("error", "Reviewer and Reviewee cannot be the same.");
       return res.redirect("back");
-    }
-    else {
+    } else {
+      // Add reviewee to the reviewer's pending reviews
       user.usersWithPendingReviews.push(req.body.reviewee);
       await user.save();
-      // flash Messages
-      req.flash("success", "Success");
+      // Display success message
+      req.flash("success", "Mapping Successful");
       return res.redirect("back");
     }
   } catch (err) {
-    console.log("Errror in setting up the user " + err);
+    console.log("Error in mapping users: " + err);
   }
 };
 
-// This function is for deleting the employee
+// Delete an employee
 module.exports.deleteEmployee = async function (req, res) {
   try {
-    // Deleting the user.
+    // Delete the user based on the provided ID
     await Users.deleteOne({ _id: req.params.id });
-    // flash Messages
+    // Display success message
     req.flash("success", "User Deleted!");
     return res.redirect("back");
   } catch (err) {
+    // Handle error while deleting employee
     console.log(err);
     req.flash("error", "Something went wrong");
     return res.redirect("back");
   }
 };
 
+// Render the 'Add Employee' form
 module.exports.getEmployeeAdditionForm = function (req, res) {
   return res.render("addEmployee");
 };
 
+// Render the 'Update Employee' form
 module.exports.getUpdateForm = async function (req, res) {
   try {
-    // Deleting the user.
+    // Find the employee based on the provided ID
     let employee = await Users.findById(req.params.id);
-
     if (!employee) {
-      req.flash("error", "Employee does not exits.");
+      // Display error if employee doesn't exist
+      req.flash("error", "Employee does not exist.");
       return res.redirect("back");
     }
-    // flash Messages
-    req.flash("success", "User Deleted!");
+    // Display success message and render the update form
+    req.flash("success", "Employee Details Fetched!");
     return res.render("employee_update_form", { oldEmployeeDetails: employee });
   } catch (err) {
     console.log(err);
@@ -83,18 +87,19 @@ module.exports.getUpdateForm = async function (req, res) {
   }
 };
 
-// Adding employe, it is same as signUp , but it will redirect you to the addEmplyee page, where as
-// that will redirect you to the sing-in page
+// Add an employee
 module.exports.addEmployee = async function (req, res) {
   try {
     if (req.body.password != req.body.confirmPassword) {
-      // Display flash messages
+      // Display error message if password and confirm password don't match
       req.flash("error", "Password should be equal to Confirm Password");
       return res.redirect("back");
     }
 
+    // Check if user with given email already exists
     let user = await Users.findOne({ email: req.body.email });
     if (!user) {
+      // Create a new user
       await Users.create({
         name: req.body.name,
         email: req.body.email,
@@ -104,15 +109,17 @@ module.exports.addEmployee = async function (req, res) {
 
       return res.redirect("/admin/view-employee");
     }
+    // Redirect back if user with email already exists
     return res.redirect("back");
   } catch (error) {
-    // Handle the error appropriately
+    // Handle error while adding employee
     console.error("Error in addEmployee:", error);
     req.flash("error", "An error occurred while adding the employee.");
     return res.redirect("back");
   }
 };
 
+// Update employee details
 module.exports.updateEmployee = async function (req, res) {
   try {
     const userId = req.body._id;
@@ -120,11 +127,12 @@ module.exports.updateEmployee = async function (req, res) {
     const confirmNewPassword = req.body.confirmPassword;
 
     if (newPassword !== confirmNewPassword) {
-      // Display flash messages
+      // Display error message if password and confirm password don't match
       req.flash("error", "Password should be equal to Confirm Password");
       return res.redirect("back");
     }
 
+    // Define updated fields based on user input
     const updatedFields = {
       name: req.body.name,
       email: req.body.email,
@@ -134,35 +142,39 @@ module.exports.updateEmployee = async function (req, res) {
       updatedFields.password = newPassword;
     }
 
+    // Find and update the user
     const user = await Users.findByIdAndUpdate(userId, updatedFields, {
       new: true,
     });
 
     if (!user) {
-      // User not found
+      // Display error message if user doesn't exist
       req.flash("error", "Employee not found");
       return res.redirect("back");
     }
 
-    // Redirect to the appropriate route after update
+    // Redirect to employee list after successful update
     return res.redirect("/admin/view-employee");
   } catch (error) {
-    // Handle errors appropriately
+    // Handle error while updating employee
     console.error("Error updating user:", error);
     req.flash("error", "An error occurred while updating user");
     return res.redirect("back");
   }
 };
 
-// THis function is used for making the new Admin, it is admin specific, fucntion
+// Make an employee an admin
 module.exports.makeEmployeeAdmin = async function (req, res) {
   try {
+    // Find the user based on the provided ID
     let user = await Users.findById(req.params.id);
 
     if (!user) {
-      req.flash("error", "This user does not exits");
+      // Display error message if user doesn't exist
+      req.flash("error", "This user does not exist");
       return res.redirect("back");
     }
+    // Update user's isAdmin field and save
     user.isAdmin = true;
     user.save();
     req.flash("success", "Successfully made Admin");
@@ -171,5 +183,4 @@ module.exports.makeEmployeeAdmin = async function (req, res) {
     console.log("Error", error);
     req.flash("error", "Something went wrong.");
     return res.redirect("back");
-  }
-};
+  }}

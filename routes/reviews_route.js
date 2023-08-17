@@ -1,16 +1,18 @@
-const express = require('express'); // requiring the express
-const router = express.Router(); // routere
-// requring the reviewController file 
-const reviewController = require('../controllers/review_controller');
-const passport = require('passport')
-// setting up the new review
-router.post('/add/:id' , reviewController.newReview);
+const express = require('express'); // Require the Express framework
+const router = express.Router(); // Create a router instance
+const reviewController = require('../controllers/review_controller'); // Require the review controller module
+const passport = require('passport'); // Require the Passport library for authentication
 
-router.get('/add/:id' , reviewController.getReviewForm);
+// Route to add a new review
+router.post('/add/:id', reviewController.newReview);
 
-// setting up the new review
-router.get('/update/:id' , passport.checkAuthenticationAsAdmin ,reviewController.getReviewUpdateForm);
+// Route to get the review form for adding a new review
+router.get('/add/:id', reviewController.getReviewForm);
 
-router.post('/update' , passport.checkAuthenticationAsAdmin ,reviewController.updateReview);
+// Route to get the review update form (requires admin authentication)
+router.get('/update/:id', passport.checkAuthenticationAsAdmin, reviewController.getReviewUpdateForm);
 
-module.exports = router;
+// Route to update a review (requires admin authentication)
+router.post('/update', passport.checkAuthenticationAsAdmin, reviewController.updateReview);
+
+module.exports = router; // Export the router module

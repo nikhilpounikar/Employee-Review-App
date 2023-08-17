@@ -1,130 +1,106 @@
+<!-- Including an external CSS file for styling -->
 <link rel="stylesheet" href="/css/home.css">
+
+<!-- Container for the entire home page -->
 <div class="home-page-container">
-    <%if(locals.user){%>
+    <% if (locals.user) { %>
+        <!-- Outer container for user content -->
         <div class="outerDiv">
-            <% if(!locals.user.isAdmin){ %>
+            <% if (!locals.user.isAdmin) { %>
+                <!-- Form for logging in as admin (if not admin) -->
                 <div class="adminPass">
                     <form action="/users/login-as-admin/<%= user._id %>" method="post">
                         <input name="adminPassCode" type="password" placeholder="Password">
-                        <button type="submit" class="submitHomeButton"> Log In as Admin</button>
+                        <button type="submit" class="submitHomeButton">Log In as Admin</button>
                     </form>
                 </div>
-                <%}%>
+            <% } %>
 
+            <!-- Table to list users with pending reviews -->
+            <div class="my-review-table-container">
+                <h6>User with Pending Reviews</h6>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Reviewee</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% let srNo = 1; %>
+                        <% for (let pendingUser of user.usersWithPendingReviews) { %>
+                            <tr>
+                                <td><%= srNo++ %></td>
+                                <td><%= pendingUser.name %></td>
+                                <td><a href="/reviews/add/<%= pendingUser._id %>">Add</a></td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
 
+            <!-- Table to display given reviews -->
+            <div class="my-review-table-container">
+                <h6>My Given Reviews</h6>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Reviewee</th>
+                            <th>Review</th>
+                            <th>Rating</th>
+                            <% if (locals.user.isAdmin) { %>
+                                <th>Update</th>
+                            <% } %>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% let index = 1; %>
+                        <% for (let review of user.givenReviews) { %>
+                            <tr>
+                                <td><%= index++ %></td>
+                                <td><%= review.reviewedTo.name %></td>
+                                <td><%= review.content %></td>
+                                <td><%= review.rating %></td>
+                                <% if (locals.user.isAdmin) { %>
+                                    <td><a href="/reviews/update/<%= review._id %>">Update</a></td>
+                                <% } %>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Table to display all reviews (only for admin) -->
+            <% if (locals.user.isAdmin) { %>
                 <div class="my-review-table-container">
-                    <h6>User with Pending Reviews</h6>
+                    <h6>All Reviews</h6>
                     <table>
                         <thead>
                             <tr>
                                 <th>Sr. No</th>
+                                <th>Reviewer</th>
                                 <th>Reviewee</th>
-                                <th>Action</th>
-                                   
+                                <th>Review</th>
+                                <th>Rating</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% let srNo=1; %>
-                                <% for(let pendingUser of user.usersWithPendingReviews ) {%>
-
-                                    <tr>
-                                        <td>
-                                            <%= srNo++ %>
-                                        </td>
-                                        <td>
-                                            <%= pendingUser.name %>
-                                        </td>
-                                
-                                        <td><a href="/reviews/add/<%=pendingUser._id%>">Add</a></td>
-                                           
-
-                                    </tr>
-                                    <%}%>
+                            <% let index = 1; %>
+                            <% for (let review of reviewList) { %>
+                                <tr>
+                                    <td><%= index++ %></td>
+                                    <td><%= review.reviewer ? review.reviewer.name : '-' %></td>
+                                    <td><%= review.reviewedTo ? review.reviewedTo.name : '-' %></td>
+                                    <td><%= review.content %></td>
+                                    <td><%= review.rating ? review.rating : '-' %></td>
+                                </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
-
-                    <div class="my-review-table-container">
-                        <h6> My Given Reviews</h6>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Sr. No</th>
-                                    <th>Reviewee</th>
-                                    <th>Review</th>
-                                    <th>Rating</th>
-
-                                    <% if(locals.user.isAdmin) { %>
-                                        <th>Update</th>
-                                        <% } %>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% let index=1; %>
-                                    <% for(let review of user.givenReviews ) {%>
-
-                                        <tr>
-                                            <td>
-                                                <%= index++ %>
-                                            </td>
-                                            <td>
-                                                <%= review.reviewedTo.name %>
-                                            </td>
-                                            <td>
-                                                <%=review.content %>
-                                            </td>
-                                            <td>
-                                                <%= review.rating %>
-                                            </td>
-                                            <% if(locals.user.isAdmin) { %>
-                                                <td><a href="/reviews/update/<%=review._id%>">Update</a></td>
-                                                <% } %>
-
-                                        </tr>
-                                        <%}%>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <% if(locals.user.isAdmin) { %>
-                        <div class="my-review-table-container">
-                            <h6> All Reviews</h6>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Sr. No</th>
-                                        <th>Reviewer</th>
-                                        <th>Reviewee</th>
-                                        <th>Review</th>
-                                        <th>Rating</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% let index=1; %>
-                                        <% for(let review of reviewList ) {%>
-
-                                            <tr>
-                                                <td>
-                                                    <%= index++ %>
-                                                </td>
-                                                <td>
-                                                    <%= review.reviewer ? review.reviewer.name : '-' %>
-                                                </td>
-                                                <td>
-                                                    <%= review.reviewedTo ? review.reviewedTo.name :'-' %>
-                                                </td>
-                                                <td>
-                                                    <%=review.content %>
-                                                </td>
-                                                <td>
-                                                    <%= review.rating ? review.rating : '-' %>
-                                                </td>
-
-                                            </tr>
-                                            <%}%>
-                                </tbody>
-                            </table>
-                        </div>
-                        <% } %>
-                            <%}%>
+            <% } %>
         </div>
+    <% } %>
+</div>

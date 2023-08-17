@@ -1,33 +1,48 @@
+<!-- Including an external CSS file for styling -->
 <link rel="stylesheet" href="/css/home.css">
+
+<!-- Inline CSS styling -->
 <style>
     .outerBox{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 2%;
+        display: flex; /* Display children elements in a row */
+        justify-content: center; /* Horizontally center children elements */
+        align-items: center; /* Vertically center children elements */
+        margin: 2%; /* Add margin around the outer box */
     }
 </style>
+
+<!-- Outer container for the form -->
 <div class="outerBox">
     
     <div class="innerBox">
+        <!-- Display the name of the user with pending review -->
         <h6>
-            To : <%= userWithPendingReview.name%>
+            To : <%= userWithPendingReview.name %>
         </h6>
+        
+        <!-- Form for adding a new review -->
         <form action="/reviews/add/<%= userWithPendingReview._id %>" method="post">
+            <!-- Text area for entering the review content -->
             <textarea class="formClass" placeholder="Review, here !" name="newReview"
-                rows="5" id="">
-            </textarea>
+                rows="5" id=""></textarea>
             <br>
+            
+            <!-- Label and select dropdown for selecting the review rating -->
             <label for="rating">Rating:</label> &nbsp;
             <select id="rating" name="rating" required>
+              <!-- Options for ratings with star symbols -->
               <option value="1">1&#9733;</option>
               <option value="2">2&#9733;</option>
               <option value="3">3&#9733;</option>
               <option value="4">4&#9733;</option>
               <option value="5">5&#9733;</option>
             </select><br>
-            <input type="hidden" value="<%=locals.user._id%>" name="reviewer">
+            
+            <!-- Hidden input field to store the reviewer's ID -->
+            <input type="hidden" value="<%= locals.user._id %>" name="reviewer">
             <br>
+            
+            <!-- Button to submit the review -->
             <button type="submit" class="submitHomeButton"> Submit </button>
         </form>
     </div>

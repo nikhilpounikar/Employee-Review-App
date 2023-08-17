@@ -1,23 +1,32 @@
+<!-- Including an external CSS file for styling -->
 <link rel="stylesheet" href="/css/home.css">
+
+<!-- Inline CSS styling -->
 <style>
     .outerBox {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 2%;
-    }
+        display: flex; /* Display children elements in a row */
+        justify-content: center; /* Horizontally center children elements */
+        align-items: center; /* Vertically center children elements */
+        margin: 2%; /* Add margin around the outer box */
+}
 </style>
 
+<!-- Outer container for the form -->
 <div class="outerBox">
     <div>
         <h2>Update Review</h2>
+        <!-- Form for updating a review -->
         <form action="/reviews/update" method="post">
+            <!-- Hidden input field to store the review ID -->
             <input type="hidden" name="id" value="<%= review._id %>">
+            <!-- Label and textarea for updating the review content -->
             <label for="content">Content:</label><br>
             <textarea id="content" name="content" rows="4" cols="50" required></textarea><br>
 
+            <!-- Label and select dropdown for updating the review rating -->
             <label for="rating">Rating:</label>&nbsp;
             <select id="rating" name="rating" required>
+                <!-- Options for ratings with star symbols -->
                 <option value="1">1&#9733;</option>
                 <option value="2">2&#9733;</option>
                 <option value="3">3&#9733;</option>
@@ -25,6 +34,7 @@
                 <option value="5">5&#9733;</option>
             </select><br>
             <br>
+            <!-- Button to submit the form and update the review -->
             <button type="submit">Update Review</button>
         </form>
     </div>
