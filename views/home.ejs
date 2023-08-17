@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERS</title>
 </head>
+
 <body>
     <%if(locals.user){%>
-        <div class="outerDiv">    
+        <div class="outerDiv">
             <% if(!locals.user.isAdmin){ %>
                 <div class="adminPass">
                     <form action="/users/login-as-admin/<%= user._id %>" method="post">
@@ -17,72 +19,96 @@
                         <button type="submit" class="submitHomeButton"> Log In as Admin</button>
                     </form>
                 </div>
-            <%}%>    
-        
+                <%}%>
 
-                <!-- the text part -->
-        <div class="home-box">
-           
-        </div>
 
-        <div class="home-box">
-            <div class="employeereview">Pending Review List<br>
-            </div>
+                    <!-- the text part -->
+                    <div class="home-box">
 
-            <div class="reviewBox">
-                <% for(let userWithPendingReview of user.usersWithPendingReviews) {%>
-                   
-                        <div class="outerBox">
-                            <h6>
-                                To : <%= userWithPendingReview.name%>
-                            </h6>
-                            <div class="innerBox">
-                                <form action="/reviews/add-review/<%= userWithPendingReview._id %>" method="post">
-                                    <textarea class="formClass" placeholder="Review, here !" name="newReview" rows="5"
-                                    id="floatingTextarea2">
+                    </div>
+
+                    <div class="home-box">
+                        <div class="employeereview">Pending Review List<br>
+                        </div>
+
+                        <div class="reviewBox">
+                            <% for(let userWithPendingReview of user.usersWithPendingReviews) {%>
+
+                                <div class="outerBox">
+                                    <h6>
+                                        To : <%= userWithPendingReview.name%>
+                                    </h6>
+                                    <div class="innerBox">
+                                        <form action="/reviews/add-review/<%= userWithPendingReview._id %>"
+                                            method="post">
+                                            <textarea class="formClass" placeholder="Review, here !" name="newReview"
+                                                rows="5" id="floatingTextarea2">
                                     </textarea>
-                                    <div class="rating">
-                                        Ratings
-                                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5">&#9733;</label>
-                                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4">&#9733;</label>
-                                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3">&#9733;</label>
-                                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2">&#9733;</label>
-                                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1">&#9733;</label>
+                                            <div class="rating">
+                                                Ratings
+                                                <input type="radio" id="star5" name="rating" value="5" /><label
+                                                    for="star5">&#9733;</label>
+                                                <input type="radio" id="star4" name="rating" value="4" /><label
+                                                    for="star4">&#9733;</label>
+                                                <input type="radio" id="star3" name="rating" value="3" /><label
+                                                    for="star3">&#9733;</label>
+                                                <input type="radio" id="star2" name="rating" value="2" /><label
+                                                    for="star2">&#9733;</label>
+                                                <input type="radio" id="star1" name="rating" value="1" /><label
+                                                    for="star1">&#9733;</label>
+                                            </div>
+                                            <input type="hidden" value="<%=locals.user._id%>" name="reviewer">
+                                            <br>
+                                            <button type="submit" class="submitHomeButton"> Submit </button>
+                                        </form>
                                     </div>
-                                    <input type="hidden" value="<%=locals.user._id%>" name="reviewer">
-                                    <br>
-                                    <button type="submit" class="submitHomeButton"> Submit </button>
-                                </form>
-                            </div>
+                                </div>
+
+
+                                <%}%>
+                        </div>
+                    </div>
+
+                    <div class="home-box">
+                        <div class="myreview">My Reviews <img src="../images/rating.webp"></div>
+                        <div class="reviewBox">
+
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No</th>
+                                        <th>Reviewee</th>
+                                        <th>Review</th>
+                                        <th>Rating</th>
+
+                                        <% if(locals.user.isAdmin) { %>
+                                        <th>Update</th>
+                                        <% } %>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% let index =1; %>
+                                    <% for(let review of user.givenReviews ) {%>
+
+                                        <tr>
+                                            <td><%= index++ %></td>
+                                            <td><%= review.reviewedTo.name %></td>
+                                            <td><%=review.content %></td>
+                                            <td><%= review.rating %></td>
+                                            <% if(locals.user.isAdmin) { %>
+                                                <td><a href="#">Update</a></td>
+                                            <% } %>
+                                            
+                                        </tr>
+                                        <%}%>
+                                </tbody>
+                            </table>
                         </div>
 
-        
-                <%}%>   
-            </div>
-        </div>
-
-        <div class="home-box">
-           <div class="myreview">My Reviews <img src="../images/rating.webp"></div>
-            <div class="reviewBox">
-
-            
-                <div class="card-out">
-                    <% for(let review of user.givenReviews ) {%>
-                        
-                        <%console.log(review);%>
-                        <div class="in-card">
-                            <h5 class="cls-txt">To: <%= review.reviewedTo.name %> </h5>
-                            <p class="cls-txt">Review : <%= review.content %> </p>
-                            <span class="">Ratings : <%= review.rating %></span>
-                        </div>
-                    <%}%>    
-                </div>
-            
-
-        </div>
-
-    </div>
-    <%}%>
+                    </div>
+                    <%}%>
 
 </body>
+
 </html>

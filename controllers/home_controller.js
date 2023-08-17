@@ -14,7 +14,6 @@ module.exports.home = async function (req, res) {
       })
       .exec();
    
-    console.log(user);
     return res.render("home", {
       user: user,
     });
