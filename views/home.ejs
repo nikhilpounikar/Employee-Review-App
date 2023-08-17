@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/home.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERS</title>
-</head>
-
-<body>
+<link rel="stylesheet" href="/css/home.css">
+<div class="home-page-container">
     <%if(locals.user){%>
         <div class="outerDiv">
             <% if(!locals.user.isAdmin){ %>
@@ -69,46 +59,87 @@
                         </div>
                     </div>
 
-                    <div class="home-box">
-                        <div class="myreview">My Reviews <img src="../images/rating.webp"></div>
-                        <div class="reviewBox">
+                    <div class="my-review-table-container">
+                        <h6> My Given Reviews</h6>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sr. No</th>
+                                    <th>Reviewee</th>
+                                    <th>Review</th>
+                                    <th>Rating</th>
 
-
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Sr. No</th>
-                                        <th>Reviewee</th>
-                                        <th>Review</th>
-                                        <th>Rating</th>
-
-                                        <% if(locals.user.isAdmin) { %>
+                                    <% if(locals.user.isAdmin) { %>
                                         <th>Update</th>
                                         <% } %>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% let index =1; %>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% let index=1; %>
                                     <% for(let review of user.givenReviews ) {%>
 
                                         <tr>
-                                            <td><%= index++ %></td>
-                                            <td><%= review.reviewedTo.name %></td>
-                                            <td><%=review.content %></td>
-                                            <td><%= review.rating %></td>
+                                            <td>
+                                                <%= index++ %>
+                                            </td>
+                                            <td>
+                                                <%= review.reviewedTo.name %>
+                                            </td>
+                                            <td>
+                                                <%=review.content %>
+                                            </td>
+                                            <td>
+                                                <%= review.rating %>
+                                            </td>
                                             <% if(locals.user.isAdmin) { %>
-                                                <td><a href="#">Update</a></td>
-                                            <% } %>
-                                            
+                                                <td><a href="/review/update/<%=review._id%>">Update</a></td>
+                                                <% } %>
+
                                         </tr>
                                         <%}%>
-                                </tbody>
-                            </table>
-                        </div>
-
+                            </tbody>
+                        </table>
                     </div>
+
+                    <% if(locals.user.isAdmin) { %>
+                    <div class="my-review-table-container">
+                        <h6> All Reviews</h6>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sr. No</th>
+                                    <th>Reviewer</th>
+                                    <th>Reviewee</th>
+                                    <th>Review</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% let index=1; %>
+                                    <% for(let review of reviewList ) {%>
+
+                                        <tr>
+                                            <td>
+                                                <%= index++ %>
+                                            </td>
+                                            <td>
+                                                <%= review.reviewer ? review.reviewer.name : '-' %>
+                                            </td>
+                                            <td>
+                                                <%= review.reviewedTo ?  review.reviewedTo.name :'-' %>
+                                            </td>
+                                            <td>
+                                                <%=review.content %>
+                                            </td>
+                                            <td>
+                                                <%= review.rating ? review.rating : '-' %>
+                                            </td>
+                                    
+                                        </tr>
+                                        <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% } %>
                     <%}%>
-
-</body>
-
-</html>
+        </div>
