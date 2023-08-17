@@ -4,7 +4,9 @@ const router = express.Router(); // routere
 const reviewController = require('../controllers/review_controller');
 const passport = require('passport')
 // setting up the new review
-router.post('/add-review/:id' , reviewController.newReview);
+router.post('/add/:id' , reviewController.newReview);
+
+router.get('/add/:id' , reviewController.getReviewForm);
 
 // setting up the new review
 router.get('/update/:id' , passport.checkAuthenticationAsAdmin ,reviewController.getReviewUpdateForm);

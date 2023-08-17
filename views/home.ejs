@@ -12,52 +12,37 @@
                 <%}%>
 
 
-                    <!-- the text part -->
-                    <div class="home-box">
+                <div class="my-review-table-container">
+                    <h6>User with Pending Reviews</h6>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sr. No</th>
+                                <th>Reviewee</th>
+                                <th>Action</th>
+                                   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% let srNo=1; %>
+                                <% for(let pendingUser of user.usersWithPendingReviews ) {%>
 
-                    </div>
+                                    <tr>
+                                        <td>
+                                            <%= srNo++ %>
+                                        </td>
+                                        <td>
+                                            <%= pendingUser.name %>
+                                        </td>
+                                
+                                        <td><a href="/reviews/add/<%=pendingUser._id%>">Add</a></td>
+                                           
 
-                    <div class="home-box">
-                        <div class="employeereview">Pending Review List<br>
-                        </div>
-
-                        <div class="reviewBox">
-                            <% for(let userWithPendingReview of user.usersWithPendingReviews) {%>
-
-                                <div class="outerBox">
-                                    <h6>
-                                        To : <%= userWithPendingReview.name%>
-                                    </h6>
-                                    <div class="innerBox">
-                                        <form action="/reviews/add-review/<%= userWithPendingReview._id %>"
-                                            method="post">
-                                            <textarea class="formClass" placeholder="Review, here !" name="newReview"
-                                                rows="5" id="floatingTextarea2">
-                                    </textarea>
-                                            <div class="rating">
-                                                Ratings
-                                                <input type="radio" id="star1" name="rating" value="1" /><label
-                                                    for="star1">&#9733;</label>
-                                                <input type="radio" id="star5" name="rating" value="5" /><label
-                                                    for="star5">&#9733;</label>
-                                                <input type="radio" id="star4" name="rating" value="4" /><label
-                                                    for="star4">&#9733;</label>
-                                                <input type="radio" id="star3" name="rating" value="3" /><label
-                                                    for="star3">&#9733;</label>
-                                                <input type="radio" id="star2" name="rating" value="2" /><label
-                                                    for="star2">&#9733;</label>
-                                            </div>
-                                            <input type="hidden" value="<%=locals.user._id%>" name="reviewer">
-                                            <br>
-                                            <button type="submit" class="submitHomeButton"> Submit </button>
-                                        </form>
-                                    </div>
-                                </div>
-
-
-                                <%}%>
-                        </div>
-                    </div>
+                                    </tr>
+                                    <%}%>
+                        </tbody>
+                    </table>
+                </div>
 
                     <div class="my-review-table-container">
                         <h6> My Given Reviews</h6>

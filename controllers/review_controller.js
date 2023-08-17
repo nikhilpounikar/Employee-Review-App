@@ -71,6 +71,24 @@ module.exports.getReviewUpdateForm = async function(req,res){
     
 }
 
+
+module.exports.getReviewForm = async function(req,res){
+
+    try {
+       let user = await User.findById(req.params.id);
+       return res.render('update_review_form',{
+        'userWithPendingReview':user
+       });
+    } catch (err) {
+        console.log('error', err);
+        req.flash('error' , "Something went wrong");
+        return res.redirect('back');
+   }
+    
+}
+
+
+
 module.exports.updateReview = async (req, res) => {
     try {
       const { content, rating } = req.body;
@@ -89,8 +107,6 @@ module.exports.updateReview = async (req, res) => {
         req.flash('error','Review not available');
         return res.redirect('back');
       }
-
-
 
       updatedReview.content = content;
       updatedReview.rating = rating;
