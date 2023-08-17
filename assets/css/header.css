@@ -1,5 +1,6 @@
 :root{
     --main-color: #2C3E50;
+    font: 12px sans-serif;
 }
 
 /* Example CSS for the navigation bar */
@@ -25,6 +26,11 @@
     border-radius: 50%;
     object-fit: cover;
 }
+.navbar-left-side a{
+    margin-left:5px ;
+    text-decoration: none;
+    font-weight: bolder;
+}
 
 .org-name{
     text-align: center;
@@ -46,7 +52,6 @@
     text-decoration: none;
     padding: 2px;
     margin: 5px;
-    font-size: small;
     border-radius: 2px;
     background-color: aliceblue;
     color: #2C3E50;
@@ -62,6 +67,19 @@
     padding: 3px 10px;
 }
 
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-left: 20px;
+}
+.user-name{
+    font-weight: bolder;
+    font-size: 12px;
+}
 .logoAndName {
     display: flex;
     align-items: center;
