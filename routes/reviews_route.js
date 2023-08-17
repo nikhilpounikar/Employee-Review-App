@@ -4,6 +4,6 @@ const router = express.Router(); // routere
 const reviewController = require('../controllers/review_controller');
 
 // setting up the new review
-router.get('/add-review/:id' , reviewController.newReview);
+router.post('/add-review/:id' , reviewController.newReview);
 
 module.exports = router;

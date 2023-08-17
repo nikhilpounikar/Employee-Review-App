@@ -37,7 +37,7 @@
                                 To : <%= userWithPendingReview.name%>
                             </h6>
                             <div class="innerBox">
-                                <form action="/reviews/add-review/<%= userWithPendingReview._id %>" method="get">
+                                <form action="/reviews/add-review/<%= userWithPendingReview._id %>" method="post">
                                     <textarea class="formClass" placeholder="Review, here !" name="newReview" rows="5"
                                     id="floatingTextarea2">
                                     </textarea>
@@ -68,10 +68,12 @@
             
                 <div class="card-out">
                     <% for(let review of user.givenReviews ) {%>
+                        
+                        <%console.log(review);%>
                         <div class="in-card">
-                            <h5 class="cls-txt">Message : <%= review.content %> </h5>
-                            <p class="cls-txt">To : <%= review.name %> </p>
-                            
+                            <h5 class="cls-txt">To: <%= review.reviewedTo.name %> </h5>
+                            <p class="cls-txt">Review : <%= review.content %> </p>
+                            <span class="">Ratings : <%= review.rating %></span>
                         </div>
                     <%}%>    
                 </div>

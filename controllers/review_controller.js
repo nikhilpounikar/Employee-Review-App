@@ -7,6 +7,7 @@ module.exports.newReview = async (req, res) => {
 
     try {
 
+
         if(req.body.newReview == undefined || req.body.newReview == "" ){
             req.flash('error' , "Please add some content");
             return res.redirect('back');
@@ -29,21 +30,23 @@ module.exports.newReview = async (req, res) => {
         employeeToReviewBeGiven.reviewRecivedFrom.push(req.body.reviewer);
         await employeeToReviewBeGiven.save();
 
+      
         let index = reviewer.usersWithPendingReviews.indexOf(req.params.id);
+        console.log(index);
+        reviewer.usersWithPendingReviews.splice(index,1);
 
-        reviewer.usersWithPendingReviews.slice(index,1);
+        
 
-        reviewer.givenReviews.push(req.params.id);
-
-        await reviewer.save();
+      
 
         const new_review = await Review.create({
             reviewer : reviewer._id,
             reviewedTo: req.params.id,
-            content: req.query.newReview,
+            content: req.body.newReview,
             rating:req.body.rating
         });
-
+        reviewer.givenReviews.push(new_review._id);
+        await reviewer.save();
         req.flash('success' , "Your review has been captured.");
         return res.redirect('back');
     } catch (err) {
