@@ -47,6 +47,14 @@
   
 }
 
+.navbar-middle-side{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 3px;
+    margin: 0px 5px;
+}
+
 .navbar-button{
     height: 30px;
     text-decoration: none;
