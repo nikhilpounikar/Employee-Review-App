@@ -5,13 +5,7 @@ module.exports.home = async function (req, res) {
   try {
     // Fetch the user details using the user ID from the request
     const user = await User.findById(req.user.id)
-      .populate({
-        path: "usersWithPendingReviews",
-        populate: {
-          path: "reviewedTo", // Populate the 'reviewedTo' field in 'usersWithPendingReviews'
-          model: "User",     // Use the 'User' model for populating 'reviewedTo'
-        },
-      })
+      .populate("usersWithPendingReviews")
       .populate({
         path: "givenReviews",
         populate: {

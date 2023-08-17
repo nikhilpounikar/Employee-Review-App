@@ -48,7 +48,7 @@ module.exports.newReview = async (req, res) => {
         reviewer.givenReviews.push(new_review._id);
         await reviewer.save();
         req.flash('success' , "Your review has been captured.");
-        return res.redirect('back');
+        return res.redirect('/');
     } catch (err) {
         console.log('error', err);
         req.flash('error' , "Something went wrong");
@@ -76,7 +76,7 @@ module.exports.getReviewForm = async function(req,res){
 
     try {
        let user = await User.findById(req.params.id);
-       return res.render('update_review_form',{
+       return res.render('add_review_form',{
         'userWithPendingReview':user
        });
     } catch (err) {
