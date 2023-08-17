@@ -1,34 +1,41 @@
-// requring express
+// Requiring the express framework
 const express = require('express');
-// making router 
+
+// Creating a router instance
 const router = express.Router();
-// requiring passprt, for chking the authrization
+
+// Requiring passport for authentication
 const passport = require('passport');
-// requring adminController file, to call the fucntion, when requied
+
+// Requiring the adminController file to call functions when needed
 const adminController = require('../controllers/admin_controller');
 
-// It will assign the work to the employeess
-router.get('/assignWork' , passport.checkAuthenticationAsAdmin , adminController.assignWork);
+// Route to assign work to employees
+router.get('/assignWork', passport.checkAuthenticationAsAdmin, adminController.assignWork);
 
-// THis is help to view the employee
-router.get('/view-employee' , passport.checkAuthenticationAsAdmin , adminController.showEmployeeList);
-// It will help to set the reviews, 
-router.post('/map-performance-reviewer-reviewee' , passport.checkAuthenticationAsAdmin , adminController.mapReviewerAndReviewee);
-// This router will make new Admin
-// It will delete the employee
-router.get('/deleteEmployee/:id', passport.checkAuthenticationAsAdmin , adminController.deleteEmployee);
+// Route to view the list of employees (restricted to admin only)
+router.get('/view-employee', passport.checkAuthenticationAsAdmin, adminController.showEmployeeList);
 
-// only admin can update other employee while rest cannot
-router.get('/employee/update/:id', passport.checkAuthenticationAsAdmin , adminController.getUpdateForm);
-// it will get employee addition form
-router.get('/employee/add-page' , passport.checkAuthenticationAsAdmin , adminController.getEmployeeAdditionForm);
+// Route to map performance reviewers and reviewees (restricted to admin only)
+router.post('/map-performance-reviewer-reviewee', passport.checkAuthenticationAsAdmin, adminController.mapReviewerAndReviewee);
 
-// all the empoyee
-router.post('/employee/add',passport.checkAuthenticationAsAdmin, adminController.addEmployee);
+// Route to delete an employee (restricted to admin only)
+router.get('/deleteEmployee/:id', passport.checkAuthenticationAsAdmin, adminController.deleteEmployee);
 
-router.post('/employee/update',passport.checkAuthenticationAsAdmin, adminController.updateEmployee);
+// Route to get the update form for an employee (restricted to admin only)
+router.get('/employee/update/:id', passport.checkAuthenticationAsAdmin, adminController.getUpdateForm);
 
-router.get('/make-admin/:id',passport.checkAuthenticationAsAdmin, adminController.makeEmployeeAdmin);
+// Route to get the employee addition form (restricted to admin only)
+router.get('/employee/add-page', passport.checkAuthenticationAsAdmin, adminController.getEmployeeAdditionForm);
 
+// Route to add a new employee (restricted to admin only)
+router.post('/employee/add', passport.checkAuthenticationAsAdmin, adminController.addEmployee);
 
+// Route to update employee details (restricted to admin only)
+router.post('/employee/update', passport.checkAuthenticationAsAdmin, adminController.updateEmployee);
+
+// Route to make an employee an admin (restricted to admin only)
+router.get('/make-admin/:id', passport.checkAuthenticationAsAdmin, adminController.makeEmployeeAdmin);
+
+// Exporting the router for use in other parts of the application
 module.exports = router;

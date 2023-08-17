@@ -1,21 +1,31 @@
-const express = require('express'); // requiring expresss
-const router = express.Router(); // router
-const homeController = require('../controllers/home_controller'); // requeiring homeController
+// Requiring the express framework
+const express = require('express');
+
+// Creating a router instance
+const router = express.Router();
+
+// Requiring the homeController file to call functions when needed
+const homeController = require('../controllers/home_controller');
+
+// Requiring passport for authentication
 const passport = require('passport');
 
-console.log(`router is loaded : {200}`);
+// Logging a message to indicate that the router is loaded
+console.log('Router is loaded: {200}');
 
-//This is initial route which decides the further routing.
+// Initial route that decides the further routing
 
-// It will redirect you to the home page
-router.get('/' ,passport.checkAuthentication, homeController.home);
+// This route will redirect you to the home page
+router.get('/', passport.checkAuthentication, homeController.home);
 
-// all the requiest withe the suffix /userr, will require the user file, to compute
-router.use('/users' , require('./users_route'));
-// all the request with the suffix /admin , will require the admin file to compute
-router.use('/admin' , require('./admin_route'));
+// All requests with the suffix '/users' will be handled by the users_route file
+router.use('/users', require('./users_route'));
 
-// all the request with the suffix /reviews , will require the admin file to compute
+// All requests with the suffix '/admin' will be handled by the admin_route file
+router.use('/admin', require('./admin_route'));
+
+// All requests with the suffix '/reviews' will be handled by the reviews_route file
 router.use('/reviews', require('./reviews_route'));
 
+// Exporting the router for use in other parts of the application
 module.exports = router;
