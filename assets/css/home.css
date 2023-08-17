@@ -10,6 +10,37 @@
 .adminPass {
   margin-top: -45px;
 }
+
+.admin-login-container{
+
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+
+}
+
+.admin-login-form input{
+  border-radius: 15px;
+  padding: 3px;
+  padding-left: 10px;
+  /* border: 1px solid var(--main-color); */
+  border: 0px;
+  font-size: small;
+  box-shadow: 0px 0px 3px rgb(12 12 12 / 80%);
+}
+.admin-login-form input:focus-visible{
+  outline: none;
+}
+
+.admin-login-form button{
+
+  border-radius: 2px;
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  padding: 3px 10px;
+  box-shadow: 0px 0px 8px rgb(12 12 12 / 80%);
+}
 /* Submit button of admin Pass */
 .submitHomeButton {
   border: 1px solid black;

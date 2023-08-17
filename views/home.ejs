@@ -8,10 +8,10 @@
         <div class="outerDiv">
             <% if (!locals.user.isAdmin) { %>
                 <!-- Form for logging in as admin (if not admin) -->
-                <div class="adminPass">
-                    <form action="/users/login-as-admin/<%= user._id %>" method="post">
-                        <input name="adminPassCode" type="password" placeholder="Password">
-                        <button type="submit" class="submitHomeButton">Log In as Admin</button>
+                <div class="admin-login-container">
+                    <form  class="admin-login-form" action="/users/login-as-admin/<%= user._id %>" method="post">
+                        <input name="adminPassCode" type="password" placeholder="Please Enter Admin Passcode">
+                        <button type="submit" class="">Login</button>
                     </form>
                 </div>
             <% } %>
