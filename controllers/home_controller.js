@@ -15,7 +15,6 @@ module.exports.home = async function (req, res) {
       .exec();
     
     const reviewList = await Review.find().populate('reviewedTo').populate('reviewer');
-    console.log(reviewList);
     return res.render("home", {
       user: user,
       'reviewList':reviewList

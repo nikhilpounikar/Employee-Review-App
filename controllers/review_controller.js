@@ -55,3 +55,51 @@ module.exports.newReview = async (req, res) => {
         return res.redirect('back');
    }
 }
+
+module.exports.getReviewUpdateForm = async function(req,res){
+
+    try {
+       let review = await Review.findById(req.params.id);
+       return res.render('update_review_form',{
+        'review':review
+       });
+    } catch (err) {
+        console.log('error', err);
+        req.flash('error' , "Something went wrong");
+        return res.redirect('back');
+   }
+    
+}
+
+module.exports.updateReview = async (req, res) => {
+    try {
+      const { content, rating } = req.body;
+
+      if(!content){
+        req.flash('error','You need to add some content');
+        return res.redirect('back');
+      }
+  
+      // Assuming you have the review ID and want to update it
+      const reviewId = req.body.id;
+  
+      const updatedReview = await Review.findById(reviewId);
+
+      if(!updatedReview){
+        req.flash('error','Review not available');
+        return res.redirect('back');
+      }
+
+
+
+      updatedReview.content = content;
+      updatedReview.rating = rating;
+      await updatedReview.save();
+      req.flash('success','Review Updated Successfully');
+      return res.redirect('/');
+    } catch (error) {
+      console.error(error);
+      req.flash('error','Somthing Went Wrong');
+      return res.redirect('back');
+    }
+  };

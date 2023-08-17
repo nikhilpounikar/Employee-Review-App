@@ -1,0 +1,17 @@
+<h2>Update Review</h2>
+  <form action="/reviews/update" method="post">
+    <input type="hidden" name="id" value="<%= review._id %>">
+    <label for="content">Content:</label><br>
+    <textarea id="content" name="content" rows="4" cols="50" required></textarea><br>
+    
+    <label for="rating">Rating:</label><br>
+    <select id="rating" name="rating" required>
+      <option value="1">1&#9733;</option>
+      <option value="2">2&#9733;</option>
+      <option value="3">3&#9733;</option>
+      <option value="4">4&#9733;</option>
+      <option value="5">5&#9733;</option>
+    </select><br>
+    
+    <button type="submit">Update Review</button>
+</form>

@@ -36,6 +36,8 @@
                                     </textarea>
                                             <div class="rating">
                                                 Ratings
+                                                <input type="radio" id="star1" name="rating" value="1" /><label
+                                                    for="star1">&#9733;</label>
                                                 <input type="radio" id="star5" name="rating" value="5" /><label
                                                     for="star5">&#9733;</label>
                                                 <input type="radio" id="star4" name="rating" value="4" /><label
@@ -44,8 +46,6 @@
                                                     for="star3">&#9733;</label>
                                                 <input type="radio" id="star2" name="rating" value="2" /><label
                                                     for="star2">&#9733;</label>
-                                                <input type="radio" id="star1" name="rating" value="1" /><label
-                                                    for="star1">&#9733;</label>
                                             </div>
                                             <input type="hidden" value="<%=locals.user._id%>" name="reviewer">
                                             <br>
@@ -92,7 +92,7 @@
                                                 <%= review.rating %>
                                             </td>
                                             <% if(locals.user.isAdmin) { %>
-                                                <td><a href="/review/update/<%=review._id%>">Update</a></td>
+                                                <td><a href="/reviews/update/<%=review._id%>">Update</a></td>
                                                 <% } %>
 
                                         </tr>
@@ -102,44 +102,44 @@
                     </div>
 
                     <% if(locals.user.isAdmin) { %>
-                    <div class="my-review-table-container">
-                        <h6> All Reviews</h6>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Sr. No</th>
-                                    <th>Reviewer</th>
-                                    <th>Reviewee</th>
-                                    <th>Review</th>
-                                    <th>Rating</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% let index=1; %>
-                                    <% for(let review of reviewList ) {%>
+                        <div class="my-review-table-container">
+                            <h6> All Reviews</h6>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No</th>
+                                        <th>Reviewer</th>
+                                        <th>Reviewee</th>
+                                        <th>Review</th>
+                                        <th>Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% let index=1; %>
+                                        <% for(let review of reviewList ) {%>
 
-                                        <tr>
-                                            <td>
-                                                <%= index++ %>
-                                            </td>
-                                            <td>
-                                                <%= review.reviewer ? review.reviewer.name : '-' %>
-                                            </td>
-                                            <td>
-                                                <%= review.reviewedTo ?  review.reviewedTo.name :'-' %>
-                                            </td>
-                                            <td>
-                                                <%=review.content %>
-                                            </td>
-                                            <td>
-                                                <%= review.rating ? review.rating : '-' %>
-                                            </td>
-                                    
-                                        </tr>
-                                        <%}%>
-                            </tbody>
-                        </table>
-                    </div>
-                    <% } %>
-                    <%}%>
+                                            <tr>
+                                                <td>
+                                                    <%= index++ %>
+                                                </td>
+                                                <td>
+                                                    <%= review.reviewer ? review.reviewer.name : '-' %>
+                                                </td>
+                                                <td>
+                                                    <%= review.reviewedTo ? review.reviewedTo.name :'-' %>
+                                                </td>
+                                                <td>
+                                                    <%=review.content %>
+                                                </td>
+                                                <td>
+                                                    <%= review.rating ? review.rating : '-' %>
+                                                </td>
+
+                                            </tr>
+                                            <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                        <% } %>
+                            <%}%>
         </div>
