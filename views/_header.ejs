@@ -12,10 +12,10 @@
             <%if(locals.user.isAdmin){%>
                 <div class="navbar-right-side">
 
-                    <div class="navbar-button"><a href="/admin/assignWork"> Assign Work </a></div>
+                    <div class="navbar-button"><a href="/admin/assignWork"> <span>Assign Task</span> </a></div>
                     <div class="navbar-button"><a href="/admin/view-employee"> Employees </a></div>
                     <div class="navbar-button"><a href="/admin/employee/add-page">  Add Employee  </a></div>
-                    <div class="navbar-button"><a href="/users/sign-out"> LogOut </a> </div>
+                    <div class="navbar-button"><a href="/users/sign-out"> Log Out </a> </div>
                     <div class="nameOfUser">
                         <span><%= locals.user.name%></span>
                     </div>
