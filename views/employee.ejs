@@ -1,54 +1,74 @@
 <link rel="stylesheet" href="/css/admin.css">
 
-<h5 class="text-center mt-3">All Employees List</h5>
 
-<div class="container mt-4">
-
-    <table class="table table-hover">
-        <thead>
+<div class="my-review-table-container">
+  <h5 class="">All Employees List</h5>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+        <th scope="col">Admin</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% let i=0%>
+        <% for(let employee of employeList) {%>
           <tr>
-            <th scope="col">S.No.</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Password</th>
-            <th scope="col">Admin</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Update</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% let i=0%>
-          <% for(let employee of employeList) {%>
-            <tr>
-              <th scope="row"><%= i++ %></th>
-              <td> <%= employee.name%> </td>
-              <td> <%= employee.email%> </td>
-              <td> <%= employee.password%> </td>
-            
-              <% if(!employee.isAdmin) {%>
-                <td> 
-                  <a href="/admin/make-admin/<%= employee._id %>" class="btn btn-md">Make</a>
-              </td>
-              <%}else{%>
-                <td>
-                  <a href="#" class="btn btn-md btn-disabled">Yes</a>
-                </td>
-              <%}%> 
+            <td scope="row">
+              <%= i++ %>
+            </td>
+            <td>
+              <%= employee.name%>
+            </td>
+            <td>
+              <%= employee.email%>
+            </td>
+            <td>
+              <%= employee.password%>
+            </td>
 
-              <% if(locals.user.id != employee._id) {%>
-                <td> 
-                  <a href="/admin/deleteEmployee/<%= employee._id %>" class="btn btn-md">Delete</a>
+            <% if(!employee.isAdmin) {%>
+
+              <td>
+                <div class="btn-active anchor-container">
+                  <a href="/admin/make-admin/<%= employee._id %>">Make</a>
+                </div>
               </td>
               <%}else{%>
                 <td>
-                  <a href="" class="btn btn-md btn-disabled">Delete</a>
+                  <div class="btn-disable anchor-container">
+                    <a href="#" class="">Yes</a>
+                  </div>
                 </td>
-              <%}%> 
-              <td> 
-                <a href="/admin/employee/update/<%= employee._id %>" class="btn btn-md">Update</a>
-            </tr>  
+                <%}%>
+
+                  <% if(locals.user.id !=employee._id) {%>
+
+                    <td>
+                      <div class="btn-active anchor-container">
+                        <a href="/admin/deleteEmployee/<%= employee._id %>">Delete</a>
+                      </div>
+                    </td>
+                    <%}else{%>
+                      <td>
+                        <div class="btn-disable anchor-container">
+                          <a href="">Delete</a>
+                        </div>
+                      </td>
+                      <%}%>
+                        <td>
+                          <div class="btn-active anchor-container">
+                            <a href="/admin/employee/update/<%= employee._id %>">Update</a>
+                          </div>
+                        </td>
+          </tr>
           <%}%>
-          
-        </tbody>
-      </table>
+
+    </tbody>
+  </table>
 </div>

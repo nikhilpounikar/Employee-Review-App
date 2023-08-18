@@ -110,38 +110,9 @@
   margin-left: 15%;
 }
 
-.my-review-table-container {
-  /* max-width: 800px; */
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
-}
+
 h2 {
   margin-bottom: 10px;
 }
 
 
-table {
-  width: 80vw;
-  border-collapse: collapse;
-  border: 1px solid #ccc;
-  background-color: white;
-}
-th,
-td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
-}
-th {
-  background-color: var(--main-color);
-  color: white;
-}
-th:last-child,
-td:last-child {
-  text-align: center;
-}
-a {
-  text-decoration: none;
-  color: #007bff;
-}
