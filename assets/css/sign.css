@@ -6,17 +6,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top:10vh;
+    /* margin-top:10vh; */
     min-width: 400px;
+    height: 85vh;
 }
 
 .login-form-container{
     background-color: var(--main-color);
     min-width: 300px;
     padding: 10px;
+    padding-bottom:20px ;
+    min-height: 250px;
     color: white;
     text-align: center;
-    padding-bottom: 30px;
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     box-shadow: var(--box-shadow-dark);
 }
 
