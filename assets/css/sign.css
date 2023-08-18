@@ -38,3 +38,13 @@
     justify-content: space-evenly;
 }
 
+.info-container{
+    margin: 5%;
+  text-align: center;
+  color: #7eb3ec;
+  font-weight: bold;
+
+}
+.task-container{
+    margin-top: 0px;
+}

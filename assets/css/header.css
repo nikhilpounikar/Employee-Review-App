@@ -239,3 +239,11 @@ a {
   justify-content: center;
   align-items: center;
 }
+
+select:focus-visible{
+  outline: none;
+}
+
+select option[disabled]{
+  display: none;
+}

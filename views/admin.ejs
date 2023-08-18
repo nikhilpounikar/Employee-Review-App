@@ -1,44 +1,49 @@
-<link rel="stylesheet" href="/css/admin.css">
-<div class="container-fluid mt-2">
-    <div class="heading">Assign employees to participate in another employee's performance review</div>
-    <div class="reviewContainer">
+<link rel="stylesheet" href="/css/sign.css">
 
-        <div class="reviewer">
+<div class="login-page-container ">
 
-            <div class="text-center">
-                Assign Task
+    <div class="login-form-container task-container">
 
-            </div>
-            <hr>
-            <form action="/admin/map-performance-reviewer-reviewee" method="POST" class="mt-1 card-body">
-                <div>
-                    Set Reviewer
-                    <select class="form-select form-select" aria-label="Default select example" name="reviewer">
-                        
-                        <% for(let i = 0; i<employe.length ; i++){ %>
-                            
-                            <option value= <%= employe[i].id %> > <%= employe[i].name %> </option>
-                            
-                        <%}%>    
-                    </select>
-                </div>
+        <div>
+            <h2>Assign Task</h2>
+           
+        </div>
+        <div class="info-container">
+            <small>
+                Delegate the responsibility of evaluating an employee's performance to a different set of employees for the review process.</small>
+        </div>
+        <form action="/admin/map-performance-reviewer-reviewee" method="POST" class="login-form">
 
-                <div class="reviewee">
-                  Select Employee to be Reviewed
-                    <select class="form-select form-select" aria-label="Default select example" name="reviewee">
-                       
-                        <% for(let i = 0; i<employe.length ; i++){ %>
-                        
-                            <option value= <%= employe[i].id %> > <%= employe[i].name %> </option>
-                            
+            <div class="select-container">
+                <select class="input-box" aria-label="Default select example" aria-placeholder="Set Reviewer"
+                    name="reviewer">
+                    <option value="" disabled selected hidden>Select Reviwer</option>
+                    <% for(let i=0; i<employe.length ; i++){ %>
+
+                        <option value=<%=employe[i].id %> > <%= employe[i].name %>
+                        </option>
+
                         <%}%>
-                    </select>
-                </div>
-                <div class="submitButtons">
+                </select>
+            </div>
+
+            <div class="reviewee">
+
+                <select class="input-box" aria-label="Default select example" name="reviewee">
+                    <option value="" disabled selected hidden>Select Reviwee</option>
+                    <% for(let i=0; i<employe.length ; i++){ %>
+
+                        <option value=<%=employe[i].id %> > <%= employe[i].name %>
+                        </option>
+
+                        <%}%>
+                </select>
+            </div>
+            <div class='login-form-button-container'>
+                <div class='btn-light'>
                     <button type="submit">Submit</button>
                 </div>
-            </form>
-
-        </div>
+            </div>
+        </form>
     </div>
 </div>
