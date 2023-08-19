@@ -91,6 +91,7 @@
   padding: 2px 5px;
   margin: 5px;
   border-radius: 3px;
+  max-width: 80px;
   background-color: #d7f8ed;
   border: 1px solid #67d9b4;
   /* color: rgba(115, 243, 51, 0.934); */
@@ -219,8 +220,14 @@ th,
 td {
   border: 1px solid #ccc;
   padding: 8px;
-  text-align: left;
+  text-align: left; 
 }
+
+.center-content{
+    display: flex;
+    justify-content: center;
+}
+
 th {
   background-color: var(--main-color);
   color: white;
@@ -235,6 +242,8 @@ a {
 }
 
 .anchor-container{
+  width: 80px;
+  max-width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -33,7 +33,11 @@
                             <tr>
                                 <td><%= srNo++ %></td>
                                 <td><%= pendingUser.name %></td>
-                                <td><a href="/reviews/add/<%= pendingUser._id %>">Add</a></td>
+                                <td class="center-content">
+                                    <div class="btn-active anchor-container">
+                  <a href="/reviews/add/<%= pendingUser._id %>">Add</a>
+                  </div>
+                            </td>
                             </tr>
                         <% } %>
                     </tbody>

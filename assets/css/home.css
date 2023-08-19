@@ -19,8 +19,14 @@
 
 }
 
+.admin-login-form{
+  min-width: 400px;
+  display: flex;
+  justify-content: space-evenly;
+}
 
 .admin-login-form input{
+  min-width: 200px;
   border-radius: 15px;
   padding: 3px;
   padding-left: 10px;
