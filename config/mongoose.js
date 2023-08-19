@@ -1,18 +1,20 @@
+//require the library
 const mongoose = require('mongoose');
-const DB = 'mongodb+srv://nikhilpounikar:1IWKLK3KdLBb2X9U@cluster0.sbronh6.mongodb.net/employee_review_db?retryWrites=true&w=majority';
-// These set of line can be written in async await fashion, but I have followed the documentation. 
-mongoose.connect(DB).then(()=>{
-     console.log('connection successful');
- }).catch((err) => console.log("no connection " + err));
 
+//connect to the database
+mongoose.connect('mongodb://127.0.0.1/employee_review_db');
+
+//acquire the connection(to check if it's successful)
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, "Error connecting to MongoDB"));
+//error
+db.on('error', function(err) { console.log(err.message); });
 
+//up and running then print the message
+db.once('open', function() {
+  
+    console.log("Successfully connected to the database");
 
-db.once('open',  function(){
-     console.log('Connected to Database :: MongoDB');
 });
 
- 
-module.exports = db;  
+module.exports = db;

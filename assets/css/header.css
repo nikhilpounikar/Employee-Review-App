@@ -265,9 +265,6 @@ select:focus-visible{
   outline: none;
 }
 
-select option[disabled]{
-  display: none;
-}
 
 h5{
   color: var(--blue-color);
@@ -275,4 +272,10 @@ h5{
 
 h2{
   color: var(--light-blue-color);
+}
+
+option {
+  background-color: var(--main-color);
+  color: white;
+
 }
