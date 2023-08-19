@@ -1,41 +1,42 @@
 <!-- Including an external CSS file for styling -->
-<link rel="stylesheet" href="/css/home.css">
-
-<!-- Inline CSS styling -->
-<style>
-    .outerBox {
-        display: flex; /* Display children elements in a row */
-        justify-content: center; /* Horizontally center children elements */
-        align-items: center; /* Vertically center children elements */
-        margin: 2%; /* Add margin around the outer box */
-}
-</style>
+<link rel="stylesheet" href="/css/sign.css">
 
 <!-- Outer container for the form -->
-<div class="outerBox">
-    <div>
+<div class="login-page-container ">
+    <div class="login-form-container review-container">
         <h2>Update Review</h2>
         <!-- Form for updating a review -->
-        <form action="/reviews/update" method="post">
-            <!-- Hidden input field to store the review ID -->
-            <input type="hidden" name="id" value="<%= review._id %>">
-            <!-- Label and textarea for updating the review content -->
-            <label for="content">Content:</label><br>
-            <textarea id="content" name="content" rows="4" cols="50" required></textarea><br>
+        <form class="login-form" action="/reviews/update" method="post">
 
-            <!-- Label and select dropdown for updating the review rating -->
-            <label for="rating">Rating:</label>&nbsp;
-            <select id="rating" name="rating" required>
-                <!-- Options for ratings with star symbols -->
-                <option value="1">1&#9733;</option>
-                <option value="2">2&#9733;</option>
-                <option value="3">3&#9733;</option>
-                <option value="4">4&#9733;</option>
-                <option value="5">5&#9733;</option>
-            </select><br>
-            <br>
-            <!-- Button to submit the form and update the review -->
-            <button type="submit">Update Review</button>
+            <div>
+                <!-- Hidden input field to store the review ID -->
+                <input type="hidden" name="id" value="<%= review._id %>">
+                <!-- Label and textarea for updating the review content -->
+                <!-- Text area for entering the review content -->
+                <textarea class="input-box text-area-box" placeholder="Review, here !" name="content" rows="5"
+                    id=""><%= review.content%></textarea>
+
+
+                <div class="select-container">
+                    <!-- Label and select dropdown for selecting the review rating -->
+                    <select class="input-box" id="rating" name="rating" required>
+                        <option value="" disabled selected hidden>Rate Employee &#9733;</option>
+                        <!-- Options for ratings with star symbols -->
+                        <option value="1">1 &#9733;</option>
+                        <option value="2">2 &#9733;</option>
+                        <option value="3">3 &#9733;</option>
+                        <option value="4">4 &#9733;</option>
+                        <option value="5">5 &#9733;</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class='login-form-button-container'>
+                <div class='btn-light'>
+                    <!-- Button to submit the form and update the review -->
+                    <button type="submit">Update Review</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>

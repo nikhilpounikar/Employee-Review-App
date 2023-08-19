@@ -48,3 +48,26 @@
 .task-container{
     margin-top: 0px;
 }
+
+.text-area-box{
+    height: 120px;
+    border: 1px solid white;
+}
+
+option{
+    background-color: transparent;
+}
+
+option {
+    background-color: var(--main-color);
+    color: white;
+
+}
+
+.review-container{
+    min-width: 400px;
+}
+
+textarea:focus-visible{
+    outline: none;
+}

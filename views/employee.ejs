@@ -9,9 +9,8 @@
         <th scope="col">S.No.</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <th scope="col">Password</th>
-        <th scope="col">Admin</th>
-        <th scope="col">Delete</th>
+        <th scope="col" style="text-align: center;">Admin</th>
+        <th scope="col" style="text-align: center;">Delete</th>
         <th scope="col">Update</th>
       </tr>
     </thead>
@@ -28,20 +27,18 @@
             <td>
               <%= employee.email%>
             </td>
-            <td>
-              <%= employee.password%>
-            </td>
+            
 
             <% if(!employee.isAdmin) {%>
 
-              <td>
-                <div class="btn-active anchor-container">
+              <td >
+                <div class="btn-active anchor-container center-content">
                   <a href="/admin/make-admin/<%= employee._id %>">Make</a>
                 </div>
               </td>
               <%}else{%>
-                <td class="center-content">
-                  <div class="btn-disable anchor-container">
+                <td class="">
+                  <div class="btn-disable anchor-container center-content">
                     <a href="#" class="">Yes</a>
                   </div>
                 </td>
@@ -49,20 +46,20 @@
 
                   <% if(locals.user.id !=employee._id) {%>
 
-                    <td>
-                      <div class="btn-active anchor-container">
+                    <td class="">
+                      <div class="btn-active anchor-container center-content">
                         <a href="/admin/deleteEmployee/<%= employee._id %>">Delete</a>
                       </div>
                     </td>
                     <%}else{%>
-                      <td>
-                        <div class="btn-disable anchor-container">
+                      <td class="">
+                        <div class="btn-disable anchor-container center-content">
                           <a href="">Delete</a>
                         </div>
                       </td>
                       <%}%>
-                        <td>
-                          <div class="btn-active anchor-container">
+                        <td class="">
+                          <div class="btn-active anchor-container center-content">
                             <a href="/admin/employee/update/<%= employee._id %>">Update</a>
                           </div>
                         </td>

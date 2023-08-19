@@ -212,6 +212,7 @@ table {
   width: 80vw;
   width: 100%;
   min-width: 80vw;
+  margin: auto;
   border-collapse: collapse;
   border: 1px solid #ccc;
   background-color: white;
@@ -224,14 +225,23 @@ td {
 }
 
 .center-content{
-    display: flex;
-    justify-content: center;
+    margin-left: 33%;
 }
 
 th {
   background-color: var(--main-color);
   color: white;
 }
+
+tr:nth-child(2n+1){
+    background-color: #9294970d;
+}
+
+tr:hover{
+
+    background-color: #d7f8ed;;
+}
+
 th:last-child,
 td:last-child {
   text-align: center;
