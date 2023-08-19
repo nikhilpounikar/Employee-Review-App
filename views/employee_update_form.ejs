@@ -1,24 +1,26 @@
 <link rel="stylesheet" href="/css/sign.css">
-<div class="mainContainer ">
-    <div class="companyLogo">
-        <img src="../images/logo.png">
-    </div>
-
-    <div class="formInput">
-        <h1> Welcome </h1>
+<div class="login-page-container ">
+    
+    <div class="login-form-container">
+        <h2> Update Employee Form </h2>
         <% if(locals.oldEmployeeDetails) {%>
-            <form method="POST" action="/admin/employee/update">
-                <input type="hidden" name="_id" value="<%= locals.oldEmployeeDetails._id %>">
-                <input type="text" name="name" value="<%= locals.oldEmployeeDetails.name %>" placeholder="Enter name"
+            <form method="POST" class="login-form" action="/admin/employee/update">
+                <div>
+                <input class="input-box" type="hidden" name="_id" value="<%= locals.oldEmployeeDetails._id %>">
+                <input class="input-box" type="text" name="name" value="<%= locals.oldEmployeeDetails.name %>" placeholder="Enter name"
                     required><br>
-                <input type="email" name="email" value="<%= locals.oldEmployeeDetails.email %>" placeholder="Enter email"
+                <input class="input-box" type="email" name="email" value="<%= locals.oldEmployeeDetails.email %>" placeholder="Enter email"
                     required><br>
-                <input type="password" name="password" placeholder="Enter new password"><br>
-                <input type="password" name="confirmPassword" placeholder="Confirm new password"><br>
-                <div class="submitButtons">
+                <input class="input-box" type="password" name="password" placeholder="Enter new password"><br>
+                <input class="input-box" type="password" name="confirmPassword" placeholder="Confirm new password"><br>
+            </div>
+            <div class= 'login-form-button-container'>
+                <div class='btn-light'>
                     <button type="submit">Update</button>
                 </div>
+            </div>
             </form>
         <% }%>
     </div>
 </div>
+
