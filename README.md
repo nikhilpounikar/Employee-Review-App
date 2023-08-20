@@ -26,7 +26,7 @@ After reaching the project directory you have to run the following the command.
         npm start || nodemon index.js
    ````
 
-#### If you want to make an employee as admin then use the secret key : Admin@123.
+#### If you want to make an employee as admin then use the secret key : admin@123.
 
 ### Features
 

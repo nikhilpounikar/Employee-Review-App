@@ -39,7 +39,7 @@ module.exports.mapReviewerAndReviewee = async function (req, res) {
       await user.save();
       // Display success message
       req.flash("success", "Mapping Successful");
-      return res.redirect("back");
+      return res.redirect("/");
     }
   } catch (err) {
     console.log("Error in mapping users: " + err);

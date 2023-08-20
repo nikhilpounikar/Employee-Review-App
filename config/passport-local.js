@@ -58,7 +58,7 @@ passport.checkAuthenticationAsAdmin = function (req, res, next){
 
     req.flash('Your are not authorised to perform this action');
     // if the user is not signed in
-    return res.redirect('back');
+    return res.redirect('/users/sign-in');
 }
 
 // Setting authentication
